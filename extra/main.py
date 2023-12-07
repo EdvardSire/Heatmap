@@ -1,5 +1,3 @@
-import os
-from sys import maxsize
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image, ImageChops
@@ -70,17 +68,9 @@ def blend_and_save(heatmap_data, output_image, colormap, dots):
     plt.xticks([])
     plt.yticks([])
     plt.axis('off')
-    plt.imshow(
-        heatmap_data, interpolation='lanczos', zorder=1, cmap=colormap
-    )
+    plt.imshow(heatmap_data, interpolation='lanczos', zorder=1, cmap=colormap)
 
-    plt.savefig(
-        heatmap_path,
-        dpi=dots,
-        pad_inches=0,
-        transparent=True,
-        bbox_inches='tight'
-    )
+    plt.savefig( heatmap_path, dpi=dots, pad_inches=0, transparent=True, bbox_inches='tight')
     print('Blending and saving image...')
 
     # Resize the heatmap to the keyboard's size, with antialiasing
@@ -145,15 +135,12 @@ char_map = {
     '\'"': ((11, 47), (12, 48))
 }
 
-
 if __name__ == '__main__':
     colormap = 'viridis'
     keys = char_map.keys()
     dpi = 600
     input = "file.txt"
     output_image= "./images/output.png"
-    blend_and_save(
-        get_frequencies(input), output_image, colormap, dpi
-    )
+    blend_and_save( get_frequencies(input), output_image, colormap, dpi)
     print(f'Image generated: {output_image}')
 
