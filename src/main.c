@@ -1,13 +1,12 @@
 #include "defs.h"
-#include <csignal>
-#include <cstdlib>
-#include <cstring>
 #include <fcntl.h>
 #include <linux/input-event-codes.h>
 #include <linux/input.h>
 #include <poll.h>
 #include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -63,7 +62,7 @@ int main() {
   strcat(logfile, formatted_date);
 
   FILE *file = fopen(logfile, "a");
-  if (file != nullptr) {
+  if (file != NULL) {
     info((char *)"Logfile open success!");
     info(logfile);
   } else {
@@ -90,7 +89,7 @@ int main() {
   struct input_event EV;
   int ret;
   signal(SIGINT, SIGINT_callback);
-  while (true) {
+  while (1) {
     ret = poll(fds, 1, timeout_ms);
 
     if (ret > 0) {

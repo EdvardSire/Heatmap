@@ -1,8 +1,8 @@
 #include "defs.h"
-#include <cstdlib>
-#include <cstring>
-#include <ctime>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
 int main() {
   // Open logfile
@@ -17,7 +17,7 @@ int main() {
   strcat(logfile, formatted_date);
 
   FILE *file = fopen(logfile, "r+");
-  if (file == nullptr) {
+  if (file == NULL) {
     fprintf(stderr, "cannot open this.txt\n");
     return 1;
   }
