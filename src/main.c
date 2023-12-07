@@ -17,16 +17,6 @@
 #define input_dev "/dev/input/event4"
 #define timeout_ms 5000
 
-void info(char *word) {
-  printf("[INFO]: ");
-  printf("%s\n", word);
-}
-
-void warn(char *word) {
-  printf("[WARN]: ");
-  printf("%s\n", word);
-}
-
 void debug() {
   char s[] = "struct input_event{ \n"
              "\tstruct timeval time\n"
@@ -37,19 +27,26 @@ void debug() {
   // the third byte in the last int represents press down
   // or up; 00 is the up press
   // The first byte here is the keycode
-  printf("\n%s\n", s);
 
-  // datestring
+  printf("\n%s\n", s);
+}
+
+void info(char *word) {
+  printf("[INFO]: ");
+  printf("%s\n", word);
+}
+
+void warn(char *word) {
+  printf("[WARN]: ");
+  printf("%s\n", word);
 }
 
 void SIGINT_callback(int signum) {
-
   printf("\nYou SIGINTed the program!\n");
   exit(signum);
 }
 
 int main() {
-
   // Open logfile
   time_t current_time;
   struct tm *time_info;
