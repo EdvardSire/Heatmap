@@ -1,0 +1,5 @@
+prog
+build
+**/__pycache__/**
+**/.extra_venv/
+**/*.txt
