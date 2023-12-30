@@ -1,14 +1,33 @@
-CC = clang
-CCOPTS = -g
-SRC = src
-BUILD = build
+# Compiler and flags
+CC = gcc
+CXX = g++
+CFLAGS = -Wall
+CXXFLAGS = -Wall
 
-all: main stat
+# Directories
+SRCDIR = src
+BUILDDIR = build
 
-main:
-	$(CC) $(CCOPTS) $(SRC)/$@.c -o $(BUILD)/$@
+# Find all C and C++ source files
+CFILES := $(wildcard $(SRCDIR)/*.c)
+CPPFILES := $(wildcard $(SRCDIR)/*.cpp)
 
-stat:
-	$(CC) $(CCOPTS) $(SRC)/$@.c -o $(BUILD)/$@
+# Generate corresponding executable names
+CEXECUTABLES := $(patsubst $(SRCDIR)/%.c, $(BUILDDIR)/%, $(CFILES))
+CPPEXECUTABLES := $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%, $(CPPFILES))
 
+# Targets
+all: $(CEXECUTABLES) $(CPPEXECUTABLES)
+
+# Compile and link C source files
+$(BUILDDIR)/%: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) $< -o $@
+
+# Compile and link C++ source files
+$(BUILDDIR)/%: $(SRCDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+# Clean rule
+clean:
+	rm -rf $(BUILDDIR)/*
 
